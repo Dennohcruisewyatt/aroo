@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hustle Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f5f5f5;
+        --card-bg: #2a2a2a;
+        --accent-color: #ff4500;
+        --modal-bg: rgba(0,0,0,0.85);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+    body { background: var(--bg-color); color: var(--text-color); }
+
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--card-bg); position: sticky; top:0; z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+    header h1 { color: var(--accent-color); font-size: 1.8rem; font-weight: 700; }
+    nav a { margin-left: 1rem; text-decoration: none; color: var(--text-color); font-weight: 600; }
+    nav a:hover { color: var(--accent-color); }
+
+    .hero { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 1rem; animation: fadeIn 1s ease; }
+    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero button { background: var(--accent-color); color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 25px; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+    .hero button:hover { opacity: 0.8; }
+
+    .marketplace { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1.5rem; padding: 2rem; }
+    .card { background: var(--card-bg); border-radius: 10px; padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.7); display: flex; flex-direction: column; align-items: center; cursor: pointer; transform: translateY(0); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.9); }
+    .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem; }
+    .card h3 { margin-bottom: 0.3rem; }
+    .card p { font-size: 0.85rem; text-align: center; margin-bottom: 0.5rem; }
+
+    .post-hustle { background: var(--card-bg); margin: 2rem auto; padding: 2rem; border-radius: 15px; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.7); }
+    .post-hustle h3 { text-align: center; margin-bottom: 1rem; }
+    .post-hustle form { display: flex; flex-direction: column; gap: 1rem; }
+    .post-hustle input, .post-hustle textarea { padding: 0.8rem; border-radius: 8px; border: none; background: #1f1f1f; color: #f5f5f5; }
+    .post-hustle input::placeholder, .post-hustle textarea::placeholder { color: #aaa; }
+    .post-hustle button { background: var(--accent-color); color: #fff; border: none; padding: 0.8rem; border-radius: 25px; cursor: pointer; font-weight: 600; }
+
+    footer { text-align: center; padding: 2rem 1rem; background: var(--card-bg); margin-top: 2rem; font-size: 0.9rem; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: var(--modal-bg); justify-content: center; align-items: center; z-index: 20; }
+    .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 15px; max-width: 400px; width: 90%; text-align: center; position: relative; }
+    .modal-content img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem; }
+    .modal-content button.close { position: absolute; top: 10px; right: 15px; background: transparent; border: none; font-size: 1.5rem; color: var(--accent-color); cursor: pointer; }
+    .buy-btn { background: var(--accent-color); color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 20px; cursor: pointer; margin-top: 0.5rem; font-weight: 600; }
+
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Hustle</h1>
+    <nav>
+        <a href="#marketplace">Marketplace</a>
+        <a href="#post">Post Hustle</a>
+        <a href="#about">About</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Your Hustle, Your Market</h2>
+    <button onclick="document.getElementById('post').scrollIntoView({behavior:'smooth'})">Post Your Hustle</button>
+</section>
+
+<section id="marketplace" class="marketplace">
+    <div class="card" data-title="Founder Hustle 1" data-price="KES 1000" data-image="https://images.unsplash.com/photo-1598032892187-c4c135dc73f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" data-desc="This is one of my top hustles as the founder!">
+        <img src="" alt="">
+        <h3>Founder Hustle 1</h3>
+        <p>KES 1000</p>
+        <p>Founder</p>
+        <button class="buy-btn">Buy</button
+    </div>
+</section>
+
+<section id="post" class="post-hustle">
+    <h3>Post Your Hustle</h3>
+    <form id="hustleForm">
+        <input type="text" id="title" placeholder="Hustle Title" required>
+        <input type="text" id="price" placeholder="Price (KES)" required>
+        <input type="url" id="image" placeholder="Image URL" required>
+        <textarea id="desc" placeholder="Description" rows="3"></textarea>
+        <button type="submit">Add Hustle</button>
+    </form>
+</section>
+
+<section id="about" class="hero">
+    <h2>About Hustle Marketplace</h2>
+    <p>Hustle Marketplace is the go-to platform for Gen Z in Kenya to sell, buy, or trade their hustles. Quick, simple, and free.</p>
+</section>
+
+<footer>
+    &copy; 2025 Hustle Marketplace | Founder: LIL MOSHII
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <button class="close" onclick="closeModal()">×</button>
+        <img src="" alt="" id="modalImage">
+        <h3 id="modalTitle"></h3>
+        <p id="modalPrice"></p>
+        <p id="modalDesc"></p>
+        <button id="modalBuy" class="buy-btn">Buy</button>
+    </div>
+</div>
+
+<script>
+const hustleForm = document.getElementById('hustleForm');
+const marketplace = document.getElementById('marketplace');
+const modal = document.getElementById('modal');
+const modalImage = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const modalPrice = document.getElementById('modalPrice');
+const modalDesc = document.getElementById('modalDesc');
+const modalBuy = document.getElementById('modalBuy');
+
+// Add Hustle Card
+hustleForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const price = document.getElementById('price').value;
+    const image = document.getElementById('image').value;
+    const desc = document.getElementById('desc').value;
+
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.setAttribute('data-title', title);
+    card.setAttribute('data-price', `KES ${price}`);
+    card.setAttribute('data-image', image);
+    card.setAttribute('data-desc', desc);
+    card.innerHTML = `
+        <img src="${image}" alt="">
+        <h3>${title}</h3>
+        <p>KES ${price}</p>
+        <button class="buy-btn">Buy</button>
+    `;
+    marketplace.prepend(card);
+    hustleForm.reset();
+    card.scrollIntoView({behavior:'smooth'});
+});
+
+// Modal open
+marketplace.addEventListener('click', (e)=>{
+    const card = e.target.closest('.card');
+    if(!card) return;
+    modalImage.src = card.getAttribute('data-image');
+    modalTitle.textContent = card.getAttribute('data-title');
+    modalPrice.textContent = card.getAttribute('data-price');
+    modalDesc.textContent = card.getAttribute('data-desc');
+    modal.style.display = 'flex';
+});
+
+// Modal close
+function closeModal(){ modal.style.display = 'none'; }
+window.addEventListener('click', (e)=>{ if(e.target == modal) closeModal(); });
+
+// Mpesa-style Buy Simulation
+modalBuy.addEventListener('click', ()=>{
+    alert(`Mpesa payment simulated for ${modalTitle.textContent} (${modalPrice.textContent})\nThanks for supporting the founder!`);
+    closeModal();
+});
+</script>
+
+</body>
+</html>
